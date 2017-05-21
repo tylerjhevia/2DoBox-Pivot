@@ -1,0 +1,59 @@
+/************************************
+          General
+************************************/
+
+* {
+  font-family: 'Roboto Slab', serif;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+a   {
+  text-decoration: none;
+}
+
+/************************************
+          Header
+************************************/
+
+header  {
+  width: 100%;
+  height: 500px;
+  background: #E5F3F2;
+}
+
+.input-container  {
+  width: 600px;
+  height: 500px;
+  margin: auto;
+  background: #E5F3F2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.idea   {
+  font-size: 20px;
+  font-weight: 700;
+  color: #00A79D;
+  margin: 0 0 0 0;
+}
+
+.box   {
+  font-size: 20px;
+  font-weight: 700;
+  color: #6D6E71;
+  margin: 0 0 0 0;
+}
+
+.input-title  {
+  margin: 0 0 0 0;
+}
+
+.input-body {
+  margin: 0 0 0 0;
+}
+
+.save-button {
+  margin: 0 0 0 0;
+}
