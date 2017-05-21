@@ -83,7 +83,7 @@ button:active {
   outline: none;
 }
 
-button:hover {
+.save-button:hover {
   background: #045E55;
 }
 
@@ -140,6 +140,7 @@ main {
   height: 20px;
   width: 20px;
   background: none;
+  float: right;
   border: none;
   background-repeat: round;
   background-image: url("assets/delete.svg");
