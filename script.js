@@ -31,24 +31,55 @@ $('.save-button').on('click', function()  {
   sendToStorage(idea);
 })
 
+//  new input in exsisting title area save to storage
+$('.card-container').on('keyup', '.idea-title',  function() {
+	var id = $(this).parent().prop('id');
+	var parsedIdea = JSON.parse(localStorage.getItem(id))
+	parsedIdea.title = $(this).val()
+	localStorage.setItem(id, JSON.stringify(parsedIdea))
+})
+
+//  new input in exsisting body area save to storage
+$('.card-container').on('keyup', '.idea-body',  function() {
+	var id = $(this).parent().prop('id');
+	var parsedIdea = JSON.parse(localStorage.getItem(id))
+	parsedIdea.body = $(this).val()
+	localStorage.setItem(id, JSON.stringify(parsedIdea))
+})
+
+// $('.card-container').on('click', '.arrow-up',  function() {
+//   console.log($(this).parent().parent());
+//   var id = $(this).parent().parent().prop('id');
+//   var parsedIdea = JSON.parse(localStorage.getItem(id));
+//   console.log(id);
+//   var currentQuality = parsedIdea.quality;
+//   console.log(currentQuality);
+//   if(currentQuality === 'Swill') {
+//     parsedIdea.quality = 'great'
+//     $(this).siblings('.quality-value').text('great');
+//   }
+//   localStorage.setItem(id, JSON.stringify(parsedIdea));
+//
+// })
+
+
 
 //   functions
 
 //  prepend idea crad to card container
 function prepend(idea)  {
   $('.card-container').prepend(`
-    <article class='idea-card'
-      id=${idea.id}>
-        <h2 class='idea-title'>${idea.title}</h2>
-        <button class='delete-button'></button>
-        <p class='idea-body'>${idea.body}</p>
-        <section class='button-container'>
-          <button class='arrow-up'></button>
-          <button class='arrow-down'></button>
-          <p class='quality'>quality:</p>
-          <p class='quality-value'> ${idea.quality}</p>
-        </section>
-        <hr />
+    <article class='idea-card'id=${idea.id}>
+      <input class='idea-title' type='text' value='${idea.title}'>
+      <button class='delete-button'></button>
+      <textarea cols='30' rows='10' class='idea-body' type='text' value=''>${idea.body}</textarea>
+      <section class='button-container'>
+        <button class='arrow-up'></button>
+        <button class='arrow-down'></button>
+        <p class='quality'>quality:</p>
+        <p class='quality-value'> ${idea.quality}</p>
+      </section>
+      <hr />
     </article>
     `)
 }

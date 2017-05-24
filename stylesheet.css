@@ -131,6 +131,9 @@ main {
 }
 
 .idea-title {
+  width: 315px;
+  outline: none;
+  border: none;
   font-family: 'Roboto Slab', serif;
   font-size: 14px;
   color: #6D6E71;
@@ -157,6 +160,10 @@ main {
   color: #939598;
   margin-top: 10px;
   margin-bottom: 10px;
+  width: 348px;
+  height: 100px;
+  border: none;
+  resize: none;
 }
 
 .button-container {
