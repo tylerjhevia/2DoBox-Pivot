@@ -1,73 +1,106 @@
-
+//***********************************************************
 //  objects
+//***********************************************************
 
 // the new idea card object
 function Idea(title, body)  {
   this.title = title;
   this.body = body;
-  this.quality = 'Swill';
-  this.id = Date.now();
-  console.log(title);
+  this.quality = 'Swill';// default quality
+  this.id = Date.now();// this creates a unique time stamp that will be used to identify an individual card by placing it in an article as the name of the ID
 }
 
-
+//************************************************************
 //  event listensers
+//************************************************************
 
 // on page load loops over local storage and appends each item to page
-$(document).ready(function() {
-	for (var i = 0; i < localStorage.length; i++) {
-		prepend(JSON.parse(localStorage.getItem(localStorage.key(i))));
+$(document).ready(function() { // fire on document load
+	for (var i = 0; i < localStorage.length; i++) { // run for loop over entire length of local storage array
+		prepend(JSON.parse(localStorage.getItem(localStorage.key(i)))); //get every item from local storage.  Parse each item.  Run the Append function on each item
 	}
 });
+
+// enable save button on inputs
+$('.input-container').on('input', function()  {
+  console.log('save')
+  enableSaveButton();
+})
 
 // save button capture input values and send to append function
 $('.save-button').on('click', function()  {
   console.log("save");
-  var title = $('.input-title').val();
-  var body = $('.input-body').val();
-  var idea = new Idea(title, body);
-  prepend(idea);
-  clearInputFields();
-  sendToStorage(idea);
+  var title = $('.input-title').val();// capture input value
+  var body = $('.input-body').val();// capture body value
+  var idea = new Idea(title, body);// create a new Idea object and pass thru the captured input and body values
+  prepend(idea); // add the new idea card to the card area
+  clearInputFields();  // clear the user input and body values
+  sendToStorage(idea); // set the item and strigify to local storage
+  disableSaveButton();
+})
+
+$(document).keypress(function(e) {
+  if(e.which == 13) {
+    enableSaveButton13();
+  }
 })
 
 //  new input in exsisting title area save to storage
-$('.card-container').on('keyup', '.idea-title',  function() {
-	var id = $(this).parent().prop('id');
-	var parsedIdea = JSON.parse(localStorage.getItem(id))
-	parsedIdea.title = $(this).val()
-	localStorage.setItem(id, JSON.stringify(parsedIdea))
+$('.card-container').on('keyup', '.idea-title',  function() {// identify typing in title field
+	var id = $(this).parent().prop('id');//get the unique id of this idea card
+	var parsedIdea = JSON.parse(localStorage.getItem(id))//get the current quality of this idea card
+	parsedIdea.title = $(this).val()// update the value of the title field
+	localStorage.setItem(id, JSON.stringify(parsedIdea))// return the updated object idea card to local storage
 })
 
 //  new input in exsisting body area save to storage
-$('.card-container').on('keyup', '.idea-body',  function() {
-	var id = $(this).parent().prop('id');
-	var parsedIdea = JSON.parse(localStorage.getItem(id))
-	parsedIdea.body = $(this).val()
-	localStorage.setItem(id, JSON.stringify(parsedIdea))
+$('.card-container').on('keyup', '.idea-body',  function() {// identify typing in body field
+	var id = $(this).parent().prop('id');//get the unique id of this idea card
+	var parsedIdea = JSON.parse(localStorage.getItem(id))//get the current quality of this idea card
+	parsedIdea.body = $(this).val() // update the value of the body field
+	localStorage.setItem(id, JSON.stringify(parsedIdea))// return the updated object idea card to local storage
 })
 
-// $('.card-container').on('click', '.arrow-up',  function() {
-//   console.log($(this).parent().parent());
-//   var id = $(this).parent().parent().prop('id');
-//   var parsedIdea = JSON.parse(localStorage.getItem(id));
-//   console.log(id);
-//   var currentQuality = parsedIdea.quality;
-//   console.log(currentQuality);
-//   if(currentQuality === 'Swill') {
-//     parsedIdea.quality = 'great'
-//     $(this).siblings('.quality-value').text('great');
-//   }
-//   localStorage.setItem(id, JSON.stringify(parsedIdea));
-//
-// })
+// up arrow button change quality
+$('.card-container').on('click', '.arrow-up',  function() {
+  var id = $(this).parent().parent().prop('id');//get the unique id of this idea card
+  var parsedIdea = JSON.parse(localStorage.getItem(id));//get this idea card from storage and parse it
+  var currentQuality = parsedIdea.quality;//get the current quality of this idea card
+  // adjust the quality based on the current quality
+  if(currentQuality === 'Swill') {
+    parsedIdea.quality = 'Plausible'// change the object idea cards quality
+    $(this).siblings('.quality-value').text('Plausible');// change the quality of the idea card on the DOM
+  }
+  else if(currentQuality === 'Plausible') {
+    parsedIdea.quality = 'Genius'// change the object idea cards quality
+    $(this).siblings('.quality-value').text('Genius');// change the quality of the idea card on the DOM
+  }
+  localStorage.setItem(id, JSON.stringify(parsedIdea));// return the updated object idea card to local storage
+})
 
+// down arrow button change quality
+$('.card-container').on('click', '.arrow-down',  function() {
+  var id = $(this).parent().parent().prop('id');//get the unique id of this idea card
+  var parsedIdea = JSON.parse(localStorage.getItem(id));//get this idea card from storage and parse it
+  var currentQuality = parsedIdea.quality;//get the current quality of this idea card
+  // adjust the quality based on the current quality
+  if(currentQuality === 'Genius') {
+    parsedIdea.quality = 'Plausible'// change the object idea cards quality
+    $(this).siblings('.quality-value').text('Plausible');// change the quality of the idea card on the DOM
+  }
+  else if(currentQuality === 'Plausible') {
+    parsedIdea.quality = 'Swill'// change the object idea cards quality
+    $(this).siblings('.quality-value').text('Swill');// change the quality of the idea card on the DOM
+  }
+  localStorage.setItem(id, JSON.stringify(parsedIdea));// return the updated object idea card to local storage
+})
 
-
+//********************************************************************************
 //   functions
+//*********************************************************************************
 
 //  prepend idea crad to card container
-function prepend(idea)  {
+function prepend(idea)  { // add the new idea card created on the save button event listener to the card section
   $('.card-container').prepend(`
     <article class='idea-card'id=${idea.id}>
       <input class='idea-title' type='text' value='${idea.title}'>
@@ -84,8 +117,38 @@ function prepend(idea)  {
     `)
 }
 
+// enable save button on return
+function enableSaveButton13()  {
+  var title = $('.input-title').val();
+  var body = $('.input-body').val();
+  var idea = new Idea(title, body);// create a new Idea object and pass thru the captured input and body values
+    if (title === "" || body === "") {
+      $('.save-button').prop('disabled', true)
+  } else {$('.save-button').prop('disabled', false)
+  prepend(idea); // add the new idea card to the card area
+  clearInputFields();  // clear the user input and body values
+  sendToStorage(idea); // set the item and strigify to local storage
+  disableSaveButton();
+}
+}
+
+// enable save button
+function enableSaveButton()  {
+  var ideaTitle = $('.input-title').val();
+  var ideaBody = $('.input-body').val();
+    if (ideaTitle === "" || ideaBody === "") {
+      $('.save-button').prop('disabled', true)
+  } else {$('.save-button').prop('disabled', false)
+}
+}
+
+// disable save button
+function disableSaveButton() {
+  $('.save-button').prop('disabled', true)
+}
+
 // clear input fields
-function clearInputFields() {
+function clearInputFields() { //clear the title and body input fields
   $('.input-title').val('');
   $('.input-body').val('');
 }

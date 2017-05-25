@@ -9,9 +9,16 @@
   color: #939598;
 }
 
-a   {
-  text-decoration: none;
+button:focus {
+outline: none;
+border: none;
 }
+
+textarea:focus {
+outline: none;
+border: none;
+}
+
 
 /************************************
           Header
@@ -54,7 +61,10 @@ header  {
   width: 350px;
   margin: 0 0 10px 0;
   font-size: 14px;
-  color: #939598;
+  color: #D1D3D4;
+  /*border-width: 1px;
+  border-color: #D1D3D4;*/
+  border: solid 2px #D1D3D4;
 }
 
 .input-body {
@@ -62,11 +72,21 @@ header  {
   width: 350px;
   margin: 0 0 10px 0;
   font-size: 14px;
-  color: #939598;
+  color: #D1D3D4;
+  resize: none;
+  /*border-style: inset;*/
+  border-width: 2px;
+  border-color: #D1D3D4;
 }
 
 input::placeholder {
   color: #939598;
+  opacity: .8;
+}
+
+textarea::placeholder {
+  color: #939598;
+  opacity: .8;
 }
 
 .save-button {
@@ -111,6 +131,7 @@ main {
   margin: auto;
   font-size: 14px;
   color: #939598;
+  border: solid 2px #D1D3D4;
 }
 
 .card-container {
