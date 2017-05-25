@@ -1,7 +1,7 @@
 //***********************************************************
 //  objects
 //***********************************************************
-
+//This is a change
 // the new idea card object
 function Idea(title, body)  {
   this.title = title;
