@@ -7,7 +7,6 @@ function Idea(title, body)  {
   this.body = body;
   this.quality = 'Swill';
   this.id = Date.now();
-  console.log(title);
 }
 
 
@@ -22,7 +21,6 @@ $(document).ready(function() {
 
 // save button capture input values and send to append function
 $('.save-button').on('click', function()  {
-  console.log("save");
   var title = $('.input-title').val();
   var body = $('.input-body').val();
   var idea = new Idea(title, body);
@@ -70,9 +68,9 @@ $('.card-container').on('keyup', '.idea-body',  function() {
 function prepend(idea)  {
   $('.card-container').prepend(`
     <article class='idea-card'id=${idea.id}>
-      <input class='idea-title' type='text' value='${idea.title}'>
+      <input class='idea-title idea-input' type='text' value='${idea.title}'>
       <button class='delete-button'></button>
-      <textarea cols='30' rows='10' class='idea-body' type='text' value=''>${idea.body}</textarea>
+      <textarea cols='30' rows='10' class='idea-body idea-input' type='text' value=''>${idea.body}</textarea>
       <section class='button-container'>
         <button class='arrow-up'></button>
         <button class='arrow-down'></button>
@@ -100,3 +98,24 @@ function getFromStorage(id) {
 	var parsedIdea = JSON.parse(localStorage.getItem(id))
 	return parsedIdea;
 }
+
+// delete
+$('.card-container').on('click', '.delete-button', function (){
+  var id = $(this).parent().prop('id');
+  localStorage.removeItem(id);
+  $(this).parent().remove();
+
+});
+// live search
+$(".search-input").on("keyup", function() {
+  var searchText = this.value
+  //jquery .each, gives two arguments, first index of selected array, second is value at that index
+  $(".idea-input").each( function(index, ideaCard){
+    if(!ideaCard.value.includes(searchText)) {
+      console.log($(this).closest("article"))
+      $(this).closest(".idea-card").hide()
+    } else {
+      $(this).closest(".idea-card").show()
+    }
+  })
+})
