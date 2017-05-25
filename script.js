@@ -23,14 +23,11 @@ $(document).ready(function() { // fire on document load
 
 // enable save button on inputs
 $('.input-container').on('input', function()  {
-  console.log('save')
   enableSaveButton();
 })
 
 // save button capture input values and send to append function
 $('.save-button').on('click', function()  {
-
-  console.log("save");
   var title = $('.input-title').val();// capture input value
   var body = $('.input-body').val();// capture body value
   var idea = new Idea(title, body);// create a new Idea object and pass thru the captured input and body values

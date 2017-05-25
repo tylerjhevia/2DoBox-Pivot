@@ -15,9 +15,11 @@ border: none;
 }
 
 textarea:focus {
-outline: none;
+/*outline: none;*/
 border: none;
 }
+
+
 
 
 /************************************
@@ -31,8 +33,8 @@ header  {
 }
 
 .input-container  {
-  width: 600px;
-  height: 210px;
+  width: 320px;
+  height: 226px;
   margin: auto;
   background: #E5F3F2;
   display: flex;
@@ -45,7 +47,7 @@ header  {
   font-size: 35px;
   font-weight: 700;
   color: #00A79D;
-  margin: 25px 0 25px 0;
+  margin: 12px 0 12px 0;
 }
 
 .box   {
@@ -58,21 +60,21 @@ header  {
 
 .input-title  {
   height: 25px;
-  width: 350px;
+  width: 300px;
   margin: 0 0 10px 0;
   font-size: 14px;
-  color: #D1D3D4;
+  color: #939598;
   /*border-width: 1px;
   border-color: #D1D3D4;*/
   border: solid 2px #D1D3D4;
 }
 
 .input-body {
-  height: 25px;
-  width: 350px;
+  height: 75px;
+  width: 300px;
   margin: 0 0 10px 0;
   font-size: 14px;
-  color: #D1D3D4;
+  color: #939598;
   resize: none;
   /*border-style: inset;*/
   border-width: 2px;
@@ -91,7 +93,7 @@ textarea::placeholder {
 
 .save-button {
   height: 25px;
-  width: 350px;
+  width: 300px;
   margin: 0 0 0 0;
   background: #00A79D;
   color: #FFFFFF;
@@ -107,6 +109,10 @@ button:active {
   background: #045E55;
 }
 
+.save-button:disabled {
+  background: #00A79D;
+}
+
 /************************************
           Main
 ************************************/
@@ -117,7 +123,7 @@ main {
 }
 
 .search-container {
-  width: 600px;
+  width: 320px;
   margin: auto;
   height: 60px;
   display: flex;
@@ -127,7 +133,7 @@ main {
 
 .search-input {
   height: 25px;
-  width: 350px;
+  width: 300px;
   margin: auto;
   font-size: 14px;
   color: #939598;
@@ -135,7 +141,7 @@ main {
 }
 
 .card-container {
-  width: 600px;
+  width: 320px;
   margin: auto;
   height: auto;
   display: flex;
@@ -146,13 +152,13 @@ main {
 
 /* idea card layout */
 .idea-card {
-  width: 350px;
+  width: 300px;
   height: 200px;
   margin: auto;
 }
 
 .idea-title {
-  width: 315px;
+  width: 275px;
   outline: none;
   border: none;
   font-family: 'Roboto Slab', serif;
@@ -181,7 +187,7 @@ main {
   color: #939598;
   margin-top: 10px;
   margin-bottom: 10px;
-  width: 348px;
+  width: 300px;
   height: 100px;
   border: none;
   resize: none;
@@ -248,4 +254,107 @@ hr {
   margin: 10px 0 10px 0;
   color: #D1D3D4;
   background-color: #D1D3D4;
+}
+
+
+/***************************************
+media query 750
+****************************************/
+
+@media screen and (min-width: 750px) {
+
+.input-container,
+.search-container,
+.card-container  {
+  width: 700px
+}
+
+.input-title,
+.input-body,
+.save-button,
+.search-input,
+.idea-card  {
+  width: 410px;
+}
+
+.idea-body  {
+  width: 400px;
+}
+
+.idea-title  {
+  width: 375px;
+}
+
+
+
+}
+
+
+/***************************************
+media query 1000
+****************************************/
+
+@media screen and (min-width: 1000px) {
+
+
+.input-title,
+.input-body,
+.save-button,
+.search-input,
+.idea-card  {
+  width: 640px;
+}
+
+.input-title,
+.input-body,
+.save-button,
+.search-input {
+  height: 40px;
+  font-size: 26px;
+}
+
+.idea,
+.box  {
+  font-size: 50px;
+}
+
+.input-container  {
+  height: 243px;
+}
+
+.delete-button  {
+  width: 30px;
+  height: 30px;
+  margin-top: 3px;
+}
+
+.idea-title {
+  font-size: 26px;
+}
+
+.idea-title,
+.idea-body  {
+  width: 590px;
+}
+
+.quality,
+.quality-value,
+.idea-body  {
+  font-size: 20px;
+}
+
+.arrow-up,
+.arrow-down {
+  width: 30px;
+  height: 30px;
+}
+
+.idea-card  {
+  height: 210px;
+}
+
+hr  {
+  margin-top: 20px;
+}
+
 }
