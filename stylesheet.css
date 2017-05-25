@@ -2,21 +2,26 @@
           General
 ************************************/
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  color: #939598;
+*
+{
+    font-family: 'Open Sans', sans-serif;
+
+    box-sizing: border-box;
+    margin: 0;
+
+    color: #939598;
 }
 
-button:focus {
-outline: none;
-border: none;
+button:focus
+{
+    border: none;
+    outline: none;
 }
 
-textarea:focus {
-/*outline: none;*/
-border: none;
+textarea:focus
+{
+    /*outline: none;*/
+    border: none;
 }
 
 
@@ -26,234 +31,304 @@ border: none;
           Header
 ************************************/
 
-header  {
-  width: 100%;
-  height: auto;
-  background: #E5F3F2;
+header
+{
+    width: 100%;
+    height: auto;
+
+    background: #e5f3f2;
 }
 
-.input-container  {
-  width: 320px;
-  height: 226px;
-  margin: auto;
-  background: #E5F3F2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.input-container
+{
+    display: flex;
+    flex-direction: column;
+
+    width: 320px;
+    height: 226px;
+    margin: auto;
+
+    background: #e5f3f2;
+
+    align-items: center;
 }
 
-.idea   {
-  font-family: 'Roboto Slab', serif;
-  font-size: 35px;
-  font-weight: 700;
-  color: #00A79D;
-  margin: 12px 0 12px 0;
+.idea
+{
+    font-family: 'Roboto Slab', serif;
+    font-size: 35px;
+    font-weight: 700;
+
+    margin: 12px 0 12px 0;
+
+    color: #00a79d;
 }
 
-.box   {
-  font-family: 'Roboto Slab', serif;
-  font-size: 35px;
-  font-weight: 700;
-  color: #6D6E71;
-  margin: 0 0 0 0;
+.box
+{
+    font-family: 'Roboto Slab', serif;
+    font-size: 35px;
+    font-weight: 700;
+
+    margin: 0 0 0 0;
+
+    color: #6d6e71;
 }
 
-.input-title  {
-  height: 25px;
-  width: 300px;
-  margin: 0 0 10px 0;
-  font-size: 14px;
-  color: #939598;
-  /*border-width: 1px;
+.input-title
+{
+    font-size: 14px;
+
+    width: 300px;
+    height: 25px;
+    margin: 0 0 10px 0;
+
+    color: #939598;
+    /*border-width: 1px;
   border-color: #D1D3D4;*/
-  border: solid 2px #D1D3D4;
+    border: solid 2px #d1d3d4;
 }
 
-.input-body {
-  height: 75px;
-  width: 300px;
-  margin: 0 0 10px 0;
-  font-size: 14px;
-  color: #939598;
-  resize: none;
-  /*border-style: inset;*/
-  border-width: 2px;
-  border-color: #D1D3D4;
+.input-body
+{
+    font-size: 14px;
+
+    width: 300px;
+    height: 75px;
+    margin: 0 0 10px 0;
+
+    resize: none;
+
+    color: #939598;
+    /*border-style: inset;*/
+    border-width: 2px;
+    border-color: #d1d3d4;
 }
 
-input::placeholder {
-  color: #939598;
-  opacity: .8;
+input::placeholder
+{
+    opacity: .8;
+    color: #939598;
 }
 
-textarea::placeholder {
-  color: #939598;
-  opacity: .8;
+textarea::placeholder
+{
+    opacity: .8;
+    color: #939598;
 }
 
-.save-button {
-  height: 25px;
-  width: 300px;
-  margin: 0 0 0 0;
-  background: #00A79D;
-  color: #FFFFFF;
-  text-decoration: none;
-  border: none;
+.save-button
+{
+    width: 300px;
+    height: 25px;
+    margin: 0 0 0 0;
+
+    text-decoration: none;
+
+    color: #fff;
+    border: none;
+    background: #00a79d;
 }
 
-button:active {
-  outline: none;
+button:active
+{
+    outline: none;
 }
 
-.save-button:hover {
-  background: #045E55;
+.save-button:hover
+{
+    background: #045e55;
 }
 
-.save-button:disabled {
-  background: #00A79D;
+.save-button:disabled
+{
+    background: #00a79d;
 }
 
 /************************************
           Main
 ************************************/
 
-main {
-  width: 100%;
-  height: auto;
+main
+{
+    width: 100%;
+    height: auto;
 }
 
-.search-container {
-  width: 320px;
-  margin: auto;
-  height: 60px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.search-container
+{
+    display: flex;
+    flex-direction: column;
+
+    width: 320px;
+    height: 60px;
+    margin: auto;
+
+    align-items: center;
 }
 
-.search-input {
-  height: 25px;
-  width: 300px;
-  margin: auto;
-  font-size: 14px;
-  color: #939598;
-  border: solid 2px #D1D3D4;
+.search-input
+{
+    font-size: 14px;
+
+    width: 300px;
+    height: 25px;
+    margin: auto;
+
+    color: #939598;
+    border: solid 2px #d1d3d4;
 }
 
-.card-container {
-  width: 320px;
-  margin: auto;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.card-container
+{
+    display: flex;
+    flex-direction: column;
+
+    width: 320px;
+    height: auto;
+    margin: auto;
+
+    align-items: center;
 }
 
 
 /* idea card layout */
-.idea-card {
-  width: 300px;
-  height: 200px;
-  margin: auto;
+.idea-card
+{
+    width: 300px;
+    height: 200px;
+    margin: auto;
 }
 
-.idea-title {
-  width: 275px;
-  outline: none;
-  border: none;
-  font-family: 'Roboto Slab', serif;
-  font-size: 14px;
-  color: #6D6E71;
-  margin: 0 0 0 0;
-  display: inline;
+.idea-title
+{
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px;
+
+    display: inline;
+
+    width: 275px;
+    margin: 0 0 0 0;
+
+    color: #6d6e71;
+    border: none;
+    outline: none;
 }
 
-.delete-button {
-  height: 20px;
-  width: 20px;
-  background: none;
-  float: right;
-  border: none;
-  background-repeat: round;
-  background-image: url("assets/delete.svg");
+.delete-button
+{
+    float: right;
+
+    width: 20px;
+    height: 20px;
+
+    border: none;
+    background: none;
+    background-image: url('assets/delete.svg');
+    background-repeat: round;
 }
 
-.delete-button:hover  {
-  background-image: url('assets/delete-hover.svg');
+.delete-button:hover
+{
+    background-image: url('assets/delete-hover.svg');
 }
 
-.idea-body {
-  font-size: 12px;
-  color: #939598;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 300px;
-  height: 100px;
-  border: none;
-  resize: none;
+.idea-body
+{
+    font-size: 12px;
+
+    width: 300px;
+    height: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    resize: none;
+
+    color: #939598;
+    border: none;
 }
 
-.button-container {
-  height: 22px;
-  width: 100%;
-
+.button-container
+{
+    width: 100%;
+    height: 22px;
 }
 
-.arrow-up {
-  height: 20px;
-  width: 20px;
-  margin-right: 7px;
-  background: none;
-  border: none;
-  background-repeat: round;
-  display: inline;
-  background-image: url("assets/upvote.svg");
+.arrow-up
+{
+    display: inline;
+
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+
+    border: none;
+    background: none;
+    background-image: url('assets/upvote.svg');
+    background-repeat: round;
 }
 
-.arrow-up:hover {
-  background-image: url('assets/upvote-hover.svg');
+.arrow-up:hover
+{
+    background-image: url('assets/upvote-hover.svg');
 }
 
-.arrow-down {
-  height: 20px;
-  width: 20px;
-  margin-right: 7px;
-  background: none;
-  border: none;
-  background-repeat: round;
-  display: inline;
-  background-image: url("assets/downvote.svg");
+.arrow-down
+{
+    display: inline;
+
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+
+    border: none;
+    background: none;
+    background-image: url('assets/downvote.svg');
+    background-repeat: round;
 }
 
-.arrow-down:hover {
-  background-image: url('assets/downvote-hover.svg');
+.arrow-down:hover
+{
+    background-image: url('assets/downvote-hover.svg');
 }
 
-.quality {
-  font-family: 'Roboto Slab', serif;
-  font-size: 12px;
-  color: #6D6E71;
-  margin: 0 0 0 0;
-  display: inline;
-  position: relative;
-  top: -3px;
+.quality
+{
+    font-family: 'Roboto Slab', serif;
+    font-size: 12px;
+
+    position: relative;
+    top: -3px;
+
+    display: inline;
+
+    margin: 0 0 0 0;
+
+    color: #6d6e71;
 }
 
-.quality-value {
-  font-size: 12px;
-  color: #6D6E71;
-  margin: 0 0 0 0;
-  display: inline;
-  position: relative;
-  top: -3px;
+.quality-value
+{
+    font-size: 12px;
+
+    position: relative;
+    top: -3px;
+
+    display: inline;
+
+    margin: 0 0 0 0;
+
+    color: #6d6e71;
 }
 
-hr {
-  height: 2px;
-  border: none;
-  margin: 10px 0 10px 0;
-  color: #D1D3D4;
-  background-color: #D1D3D4;
+hr
+{
+    height: 2px;
+    margin: 10px 0 10px 0;
+
+    color: #d1d3d4;
+    border: none;
+    background-color: #d1d3d4;
 }
 
 
@@ -261,32 +336,33 @@ hr {
 media query 750
 ****************************************/
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 750px)
+{
+    .input-container,
+    .search-container,
+    .card-container
+    {
+        width: 700px;
+    }
 
-.input-container,
-.search-container,
-.card-container  {
-  width: 700px
-}
+    .input-title,
+    .input-body,
+    .save-button,
+    .search-input,
+    .idea-card
+    {
+        width: 410px;
+    }
 
-.input-title,
-.input-body,
-.save-button,
-.search-input,
-.idea-card  {
-  width: 410px;
-}
+    .idea-body
+    {
+        width: 400px;
+    }
 
-.idea-body  {
-  width: 400px;
-}
-
-.idea-title  {
-  width: 375px;
-}
-
-
-
+    .idea-title
+    {
+        width: 375px;
+    }
 }
 
 
@@ -294,67 +370,77 @@ media query 750
 media query 1000
 ****************************************/
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1000px)
+{
+    .input-title,
+    .input-body,
+    .save-button,
+    .search-input,
+    .idea-card
+    {
+        width: 640px;
+    }
 
+    .input-title,
+    .input-body,
+    .save-button,
+    .search-input
+    {
+        font-size: 26px;
 
-.input-title,
-.input-body,
-.save-button,
-.search-input,
-.idea-card  {
-  width: 640px;
-}
+        height: 40px;
+    }
 
-.input-title,
-.input-body,
-.save-button,
-.search-input {
-  height: 40px;
-  font-size: 26px;
-}
+    .idea,
+    .box
+    {
+        font-size: 50px;
+    }
 
-.idea,
-.box  {
-  font-size: 50px;
-}
+    .input-container
+    {
+        height: 243px;
+    }
 
-.input-container  {
-  height: 243px;
-}
+    .delete-button
+    {
+        width: 30px;
+        height: 30px;
+        margin-top: 3px;
+    }
 
-.delete-button  {
-  width: 30px;
-  height: 30px;
-  margin-top: 3px;
-}
+    .idea-title
+    {
+        font-size: 26px;
+    }
 
-.idea-title {
-  font-size: 26px;
-}
+    .idea-title,
+    .idea-body
+    {
+        width: 590px;
+    }
 
-.idea-title,
-.idea-body  {
-  width: 590px;
-}
+    .quality,
+    .quality-value,
+    .idea-body
+    {
+        font-size: 20px;
+    }
 
-.quality,
-.quality-value,
-.idea-body  {
-  font-size: 20px;
-}
+    .arrow-up,
+    .arrow-down
+    {
+        width: 30px;
+        height: 30px;
+    }
 
-.arrow-up,
-.arrow-down {
-  width: 30px;
-  height: 30px;
-}
+    .idea-card
+    {
+        height: 210px;
+    }
 
-.idea-card  {
-  height: 210px;
-}
-
-hr  {
-  margin-top: 20px;
-}
-
+    hr
+    {
+        margin-top: 20px;
+    }
 }
