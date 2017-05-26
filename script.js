@@ -1,47 +1,51 @@
-//***********************************************************
-//  objects
-//***********************************************************
-//This is a change
-// the new idea card object
+
 function Idea(title, body)  {
   this.title = title;
   this.body = body;
-  this.quality = 'Swill';// default quality
-  this.id = Date.now();// this creates a unique time stamp that will be used to identify an individual card by placing it in an article as the name of the ID
+  this.quality = 'Swill';
+  this.id = Date.now();
 }
 
 //************************************************************
 //  event listensers
 //************************************************************
+$(document).ready(reloadCards);
 
-// on page load loops over local storage and appends each item to page
-$(document).ready(function() { // fire on document load
-	for (var i = 0; i < localStorage.length; i++) { // run for loop over entire length of local storage array
-		prepend(JSON.parse(localStorage.getItem(localStorage.key(i)))); //get every item from local storage.  Parse each item.  Run the Append function on each item
-	}
-});
+function reloadCards() {
+  for (var i = 0; i < localStorage.length; i++) {
+  prependCard(JSON.parse(localStorage.getItem(localStorage.key(i))));
+}
+}
 
-// enable save button on inputs
-$('.input-container').on('input', function()  {
-  enableSaveButton();
-})
+$('.input-container').on('input', enableSaveButton);
+$('.save-button').on('.click', clickSave);
 
-// save button capture input values and send to append function
-$('.save-button').on('click', function()  {
+function clickSave() {
   var title = $('.input-title').val();// capture input value
   var body = $('.input-body').val();// capture body value
   var idea = new Idea(title, body);// create a new Idea object and pass thru the captured input and body values
-  prepend(idea); // add the new idea card to the card area
+  prependCard(idea); // add the new idea card to the card area
   clearInputFields();  // clear the user input and body values
   sendToStorage(idea); // set the item and strigify to local storage
   disableSaveButton();
-})
+}
 
-$(document).keypress(function(e) {
-  if(e.which == 13) {
-    enableSaveButton13();
-  }
-})
+// // save button capture input values and send to append function
+// $('.save-button').on('click', function()  {
+//   var title = $('.input-title').val();// capture input value
+//   var body = $('.input-body').val();// capture body value
+//   var idea = new Idea(title, body);// create a new Idea object and pass thru the captured input and body values
+//   prependCard(idea); // add the new idea card to the card area
+//   clearInputFields();  // clear the user input and body values
+//   sendToStorage(idea); // set the item and strigify to local storage
+//   disableSaveButton();
+// })
+
+// $(document).keypress(function(e) {
+//   if(e.which == 13) {
+//     enableSaveButton13();
+//   }
+// })
 
 //  new input in exsisting title area save to storage
 $('.card-container').on('keyup', '.idea-title',  function() {// identify typing in title field
@@ -98,7 +102,7 @@ $('.card-container').on('click', '.arrow-down',  function() {
 //*********************************************************************************
 
 //  prepend idea crad to card container
-function prepend(idea)  { // add the new idea card created on the save button event listener to the card section
+function prependCard(idea)  { // add the new idea card created on the save button event listener to the card section
   $('.card-container').prepend(`
     <article class='idea-card'id=${idea.id}>
       <input class='idea-title idea-input' type='text' value='${idea.title}'>
@@ -115,20 +119,23 @@ function prepend(idea)  { // add the new idea card created on the save button ev
     `)
 }
 
+$('.input-title, .input-body').on('input', enableSaveButton);
+
+
 // enable save button on return
 function enableSaveButton13()  {
   var title = $('.input-title').val();
   var body = $('.input-body').val();
   var idea = new Idea(title, body);// create a new Idea object and pass thru the captured input and body values
-    if (title === "" || body === "") {
-      $('.save-button').prop('disabled', true)
-  } else {$('.save-button').prop('disabled', false)
-  prepend(idea); // add the new idea card to the card area
+  //   if (title === "" || body === "") {
+  //     $('.save-button').prop('disabled', true)
+  // } else {$('.save-button').prop('disabled', false)
+  prependCard(idea); // add the new idea card to the card area
   clearInputFields();  // clear the user input and body values
   sendToStorage(idea); // set the item and strigify to local storage
   disableSaveButton();
 }
-}
+
 
 // enable save button
 function enableSaveButton()  {
@@ -181,4 +188,4 @@ $(".search-input").on("keyup", function() {
       $(this).closest(".idea-card").show()
     }
   })
-})
+});

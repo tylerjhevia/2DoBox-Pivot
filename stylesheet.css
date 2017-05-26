@@ -142,7 +142,7 @@ button:active
 
 .save-button:disabled
 {
-    background: #00a79d;
+    background: black;
 }
 
 /************************************
