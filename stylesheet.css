@@ -55,7 +55,7 @@ header {
   width: 300px;
 }
 
-.input-body {
+.input-task {
   border-color: #d1d3d4;
   border-width: 2px;
   color: #939598;
@@ -76,12 +76,13 @@ textarea::placeholder {
   color: #939598;
 }
 
-.save-button {
+.save-button,
+.show-completed-button {
   background: #00a79d;
   border: none;
   color: #fff;
   height: 25px;
-  margin: 0 0 0 0;
+  margin: 5px;
   text-decoration: none;
   width: 300px;
 }
@@ -207,7 +208,7 @@ main {
   background-image: url('assets/downvote-hover.svg');
 }
 
-.quality {
+.importance {
   color: #6d6e71;
   display: inline;
   font-family: 'Roboto Slab', serif;
@@ -217,13 +218,22 @@ main {
   top: -3px;
 }
 
-.quality-value {
+.current-importance {
   color: #6d6e71;
   display: inline;
   font-size: 12px;
   margin: 0 0 0 0;
   position: relative;
   top: -3px;
+}
+
+.completed-task-button {
+  position: relative;
+  bottom: 4px;
+}
+
+.completed-task-button:hover {
+  background-color: orange;
 }
 
 hr {
@@ -234,6 +244,10 @@ hr {
   background-color: #d1d3d4;
 }
 
+.grayout {
+  opacity: 0.3;
+}
+
 @media screen and (min-width: 750px) {
   .input-container,
   .search-container,
@@ -242,8 +256,9 @@ hr {
   }
 
   .input-title,
-  .input-body,
+  .input-task,
   .save-button,
+  .show-completed-button,
   .search-input,
   .idea-card {
     width: 410px;
@@ -261,16 +276,18 @@ hr {
 @media screen and (min-width: 1000px)
 {
   .input-title,
-  .input-body,
+  .input-task,
   .save-button,
+  .show-completed-button,
   .search-input,
   .idea-card {
     width: 640px;
   }
 
   .input-title,
-  .input-body,
+  .input-task,
   .save-button,
+  .show-completed-button,
   .search-input {
     font-size: 26px;
     height: 40px;
@@ -300,8 +317,8 @@ hr {
     width: 590px;
   }
 
-  .quality,
-  .quality-value,
+  .importance,
+  .current-importance,
   .idea-body {
     font-size: 20px;
   }

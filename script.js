@@ -1,33 +1,40 @@
 $(document).ready(reloadCards);
 
-$('.input-title, .input-body').on('input', enableSaveButton);
+$('.input-title, .input-task').on('input', enableSaveButton);
 $('.save-button').on('click', clickSave);
+$('.show-completed-button').on('click', reloadCompletedTasks);
 $('.card-container').on('keyup', '.idea-title', editAndStoreTitle);
 $('.card-container').on('keyup', '.idea-body',  editAndStoreBody);
-$('.card-container').on('click', '.arrow-up', upvoteFromPlausible)
-                    .on('click', '.arrow-up', upvoteFromSwill);
-$('.card-container').on('click', '.arrow-down', downvoteFromPlausible)
-                    .on('click', '.arrow-down', downvoteFromGenius);
+$('.card-container').on('click', '.arrow-up', upvote);
+$('.card-container').on('click', '.arrow-down', downvote);
 $('.card-container').on('click', '.delete-button', deleteCard);
 $('.search-input').on('input',  searchIdeas);
+$(".card-container").on("click", ".completed-task-button", grayOutCompleted);
+$('.card-container').on('keypress', '.idea-input', saveEditsOnEnter);
 
-
-function reloadCards() {
-  for (var i = 0; i < localStorage.length; i++) {
-  prependCard(JSON.parse(localStorage.getItem(localStorage.key(i))));
-  }
-}
 
 function Idea(title, body)  {
   this.title = title;
   this.body = body;
-  this.quality = 'Swill';
   this.id = Date.now();
+  this.completed = false;
+  this.importance = ["None", "Low", "Normal", "High", "Critical"];
+  this.index = 2;
+  this.currentImportance = this.importance[this.index];
+}
+
+function reloadCards() {
+  for (var i = 0; i < localStorage.length; i++) {
+    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (ideaObject.completed === false) {
+      prependCard(ideaObject);
+    }
+  }
 }
 
 function clickSave() {
   var title = $('.input-title').val();
-  var body = $('.input-body').val();
+  var body = $('.input-task').val();
   var idea = new Idea(title, body);
   prependCard(idea);
   sendToStorage(idea);
@@ -48,8 +55,9 @@ function prependCard(idea)  {
       <section class='button-container'>
         <button class='arrow-up'></button>
         <button class='arrow-down'></button>
-        <p class='quality'>quality:</p>
-        <p class='quality-value'> ${idea.quality}</p>
+        <p class='importance'>Importance:</p>
+        <p class='current-importance'> ${idea.currentImportance}</p>
+        <button class="completed-task-button">Completed Task</button>
       </section>
       <hr />
     </article>
@@ -58,7 +66,7 @@ function prependCard(idea)  {
 
 function clearInputFields() {
   $('.input-title').val('');
-  $('.input-body').val('');
+  $('.input-task').val('');
 }
 
 function disableSaveButton() {
@@ -67,19 +75,12 @@ function disableSaveButton() {
 
 function enableSaveButton()  {
   var ideaTitle = $('.input-title').val();
-  var ideaBody = $('.input-body').val();
+  var ideaBody = $('.input-task').val();
     if (ideaTitle === "" || ideaBody === "") {
       $('.save-button').prop('disabled', true)
-  } else {$('.save-button').prop('disabled', false)
+    } else {$('.save-button').prop('disabled', false)
+      }
 }
-}
-
-
-// $(document).keypress(function(e) {    WHAT IS THIS?????
-//   if(e.which == 13) {
-//     enableSaveButton13();
-// // //   }
-// // })
 
 function editAndStoreTitle() {
   var id = $(this).parent().prop('id');
@@ -94,45 +95,29 @@ function editAndStoreBody() {
   parsedIdea.body = $(this).val();
   localStorage.setItem(id, JSON.stringify(parsedIdea));
 }
-//
-function upvoteFromSwill() {
+
+function downvote() {
   var id = $(this).parent().parent().prop('id');
   var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if(parsedIdea.quality === 'Swill') {
-    parsedIdea.quality = 'Plausible'
-    $(this).siblings('.quality-value').text('Plausible');
+  if (parsedIdea.index === 0 ) {
+    return
   }
-  localStorage.setItem(id, JSON.stringify(parsedIdea));
+  parsedIdea.index--;
+  parsedIdea.currentImportance = parsedIdea.importance[parsedIdea.index];
+  sendToStorage(parsedIdea);
+  $(this).siblings('.current-importance').text(parsedIdea.importance[parsedIdea.index]);
 }
 
-function upvoteFromPlausible() {
+function upvote() {
   var id = $(this).parent().parent().prop('id');
   var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if (parsedIdea.quality === 'Plausible') {
-      parsedIdea.quality = 'Genius'
-      $(this).siblings('.quality-value').text('Genius');
+  if (parsedIdea.index === parsedIdea.importance.length - 1) {
+    return
   }
-  localStorage.setItem(id, JSON.stringify(parsedIdea));
-}
-
-function downvoteFromGenius() {
-  var id = $(this).parent().parent().prop('id');
-  var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if (parsedIdea.quality === 'Genius') {
-      parsedIdea.quality = 'Plausible'
-      $(this).siblings('.quality-value').text('Plausible');
-    }
-    localStorage.setItem(id, JSON.stringify(parsedIdea));
-}
-
-function downvoteFromPlausible() {
-  var id = $(this).parent().parent().prop('id');
-  var parsedIdea = JSON.parse(localStorage.getItem(id));
-  if (parsedIdea.quality === 'Plausible') {
-      parsedIdea.quality = 'Swill'
-      $(this).siblings('.quality-value').text('Swill');
-    }
-    localStorage.setItem(id, JSON.stringify(parsedIdea));
+  parsedIdea.index++;
+  parsedIdea.currentImportance = parsedIdea.importance[parsedIdea.index];
+  sendToStorage(parsedIdea);
+  $(this).siblings('.current-importance').text(parsedIdea.importance[parsedIdea.index]);
 }
 
 function deleteCard() {
@@ -140,7 +125,6 @@ function deleteCard() {
   localStorage.removeItem(id);
   $(this).parent().remove();
 }
-
 
 function searchIdeas() {
   var searchInput = $(this).val().toLowerCase();
@@ -153,4 +137,32 @@ function searchIdeas() {
       $(this).hide();
     }
   })
+}
+
+// put this in to save changes to title and task when enter button is pressed
+function saveEditsOnEnter(event) {
+  var ideaID = ($(this).closest('.idea-card').prop('id'));
+  var parsedIdea = JSON.parse(localStorage.getItem(ideaID));
+  if(event.keyCode === 13) {
+    event.preventDefault();
+    sendToStorage(parsedIdea);
+    $('.idea-input').blur();
+  }
+}
+
+function grayOutCompleted() {
+  var ideaID = ($(this).closest('.idea-card').prop('id'));
+  var parsedIdea = JSON.parse(localStorage.getItem(ideaID));
+  parsedIdea.completed = true;
+  sendToStorage(parsedIdea);
+  $(this).parent().parent().addClass('grayout');
+}
+
+function reloadCompletedTasks() {
+  for (var i = 0; i < localStorage.length; i++) {
+    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (ideaObject.completed === true) {
+      prependCard(ideaObject);
+    }
+  }
 }
