@@ -12,7 +12,6 @@ $('.search-input').on('input',  searchIdeas);
 $(".card-container").on("click", ".completed-task-button", grayOutCompleted);
 $('.card-container').on('keypress', '.idea-input', saveEditsOnEnter);
 
-
 function Idea(title, body)  {
   this.title = title;
   this.body = body;
@@ -23,13 +22,43 @@ function Idea(title, body)  {
   this.currentImportance = this.importance[this.index];
 }
 
+// function reloadCards() {
+//   for (var i = 0; i < localStorage.length; i++) {
+//     var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+//     if (ideaObject.completed === false) {
+//       prependCard(ideaObject);
+//     }
+//   }
+// }
+
 function reloadCards() {
   for (var i = 0; i < localStorage.length; i++) {
+    while ($('.ideacard').length < 10) {
     var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if (ideaObject.completed === false) {
       prependCard(ideaObject);
     }
+    }
   }
+}
+
+// checking number of cards on page. fewer than 10 --> returns true; more than 10 --> returns false
+// we want to use this to determine when we should stop prepending cards
+// function isLessThanTen() {
+//   var cardArray = $('.idea-card');
+//   if (cardArray.length < 10 === true) {
+//     return reloadCards()
+//   } else {
+//       return false
+//   }
+// }
+
+function checkNumberOfTasks() {
+  var ideaCardArray = $('.idea-card');
+  if (ideaCardArray.length > 10) {
+    return console.log('too many!');
+  }
+  else return console.log('you good');
 }
 
 function clickSave() {
@@ -129,7 +158,8 @@ function deleteCard() {
 function searchIdeas() {
   var searchInput = $(this).val().toLowerCase();
   $(".idea-card").each(function() {
-    var ideaText = $(this).text().toLowerCase();
+    var ideaText = $(this).children('.idea-input').text().toLowerCase();
+    console.log((this).children);
     if(ideaText.indexOf(searchInput) !== -1) {
       $(this).show();
     }
