@@ -16,7 +16,7 @@ textarea:focus {
 
 header {
   background: #e5f3f2;
-  height: auto;
+  height: 37vh;
   width: 100%;
 }
 
@@ -77,7 +77,8 @@ textarea::placeholder {
 }
 
 .save-button,
-.show-completed-button {
+.show-completed-button,
+.show-more-button {
   background: #00a79d;
   border: none;
   color: #fff;
@@ -85,6 +86,22 @@ textarea::placeholder {
   margin: 5px;
   text-decoration: none;
   width: 300px;
+}
+
+.importance-filters {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+}
+
+.none-filter,
+.low-filter,
+.medium-filter,
+.high-filter,
+.critical-filter {
+  background-color: #00a79d;
+  color: white;
+  height: 10%;
 }
 
 button:active {
@@ -225,6 +242,11 @@ main {
   margin: 0 0 0 0;
   position: relative;
   top: -3px;
+}
+
+.show-more-button {
+  display: block;
+  margin: 0 auto;
 }
 
 .completed-task-button {

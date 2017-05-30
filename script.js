@@ -187,4 +187,5 @@ function reloadCompletedTasks() {
   }
 }
 
-//
+// filtering by importance
+// we want to check each card for importance and
