@@ -55,6 +55,8 @@ function reloadCardsWithImportanceLow() {
   }
 }
 
+$('.medium-filter').on('click', reloadCardsWithImportanceMedium);
+
 function reloadCardsWithImportanceMedium() {
   $('.idea-card').remove();
   for (var i = 0; i < localStorage.length; i++) {
@@ -65,6 +67,8 @@ function reloadCardsWithImportanceMedium() {
   }
 }
 
+$('.high-filter').on('click', reloadCardsWithImportanceHigh);
+
 function reloadCardsWithImportanceHigh() {
   $('.idea-card').remove();
   for (var i = 0; i < localStorage.length; i++) {
@@ -74,6 +78,8 @@ function reloadCardsWithImportanceHigh() {
     }
   }
 }
+
+$('.critical-filter').on('click', reloadCardsWithImportanceCritical);
 
 function reloadCardsWithImportanceCritical() {
   $('.idea-card').remove();
