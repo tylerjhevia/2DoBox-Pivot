@@ -31,6 +31,59 @@ function reloadCards() {
   }
 }
 
+$('.none-filter').on('click', reloadCardsWithImportanceNone);
+
+function reloadCardsWithImportanceNone() {
+  $('.idea-card').remove();
+  for (var i = 0; i < localStorage.length; i++) {
+    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (ideaObject.currentImportance === "None") {
+      prependCard(ideaObject);
+    }
+  }
+}
+
+$('.low-filter').on('click', reloadCardsWithImportanceLow);
+
+function reloadCardsWithImportanceLow() {
+  $('.idea-card').remove();
+  for (var i = 0; i < localStorage.length; i++) {
+    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (ideaObject.currentImportance === "Low") {
+      prependCard(ideaObject);
+    }
+  }
+}
+
+function reloadCardsWithImportanceMedium() {
+  $('.idea-card').remove();
+  for (var i = 0; i < localStorage.length; i++) {
+    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (ideaObject.currentImportance === "Medium") {
+      prependCard(ideaObject);
+    }
+  }
+}
+
+function reloadCardsWithImportanceHigh() {
+  $('.idea-card').remove();
+  for (var i = 0; i < localStorage.length; i++) {
+    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (ideaObject.currentImportance === "High") {
+      prependCard(ideaObject);
+    }
+  }
+}
+
+function reloadCardsWithImportanceCritical() {
+  $('.idea-card').remove();
+  for (var i = 0; i < localStorage.length; i++) {
+    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    if (ideaObject.currentImportance === "Critical") {
+      prependCard(ideaObject);
+    }
+  }
+}
 
 
 // checking number of cards on page. fewer than 10 --> returns true; more than 10 --> returns false
