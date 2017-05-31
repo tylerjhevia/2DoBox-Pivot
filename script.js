@@ -11,6 +11,12 @@ $('.card-container').on('click', '.delete-button', deleteCard);
 $('.search-input').on('input',  searchIdeas);
 $(".card-container").on("click", ".completed-task-button", grayOutCompleted);
 $('.card-container').on('keypress', '.idea-input', saveEditsOnEnter);
+$('.critical-filter').on('click', filterCardsByImportance);
+$('.high-filter').on('click', filterCardsByImportance);
+$('.normal-filter').on('click', filterCardsByImportance);
+$('.low-filter').on('click', filterCardsByImportance);
+$('.none-filter').on('click', filterCardsByImportance);
+$('.show-more-button').on('click', reloadAllCards);
 
 function Idea(title, body)  {
   this.title = title;
@@ -26,95 +32,51 @@ function reloadCards() {
   for (var i = 0; i < localStorage.length; i++) {
     var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if (ideaObject.completed === false) {
-      prependCard(ideaObject);
+      limitNumberOfCards(ideaObject);
     }
   }
 }
 
-$('.none-filter').on('click', reloadCardsWithImportanceNone);
-
-function reloadCardsWithImportanceNone() {
+function reloadAllCards() {
   $('.idea-card').remove();
   for (var i = 0; i < localStorage.length; i++) {
     var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if (ideaObject.currentImportance === "None") {
-      prependCard(ideaObject);
-    }
+    prependCard(ideaObject);
   }
 }
 
-$('.low-filter').on('click', reloadCardsWithImportanceLow);
+// we want to check how many cards are on page when we press save
+// if there are < 10, we want to run prependCard as usual
+// if there are >= 10, we want to remove the oldest (bottom) card from the page and then run prependCard
+function limitNumberOfCards(idea) {
+  var cardCount = $('.idea-card').length;
+  console.log(cardCount[2]);
+  var cardsOnScreenArray = $('.idea-card');
+  if (cardCount < 10) {
+    prependCard(idea);
+  } else {
+     cardsOnScreenArray[9].remove();
+     prependCard(idea);
+    }
+}
 
-function reloadCardsWithImportanceLow() {
+function filterCardsByImportance() {
   $('.idea-card').remove();
+  var filterBy = (this).innerHTML;
   for (var i = 0; i < localStorage.length; i++) {
     var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if (ideaObject.currentImportance === "Low") {
+    if (ideaObject.currentImportance === filterBy) {
       prependCard(ideaObject);
     }
   }
 }
-
-$('.medium-filter').on('click', reloadCardsWithImportanceMedium);
-
-function reloadCardsWithImportanceMedium() {
-  $('.idea-card').remove();
-  for (var i = 0; i < localStorage.length; i++) {
-    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if (ideaObject.currentImportance === "Medium") {
-      prependCard(ideaObject);
-    }
-  }
-}
-
-$('.high-filter').on('click', reloadCardsWithImportanceHigh);
-
-function reloadCardsWithImportanceHigh() {
-  $('.idea-card').remove();
-  for (var i = 0; i < localStorage.length; i++) {
-    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if (ideaObject.currentImportance === "High") {
-      prependCard(ideaObject);
-    }
-  }
-}
-
-$('.critical-filter').on('click', reloadCardsWithImportanceCritical);
-
-function reloadCardsWithImportanceCritical() {
-  $('.idea-card').remove();
-  for (var i = 0; i < localStorage.length; i++) {
-    var ideaObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if (ideaObject.currentImportance === "Critical") {
-      prependCard(ideaObject);
-    }
-  }
-}
-
-
-// checking number of cards on page. fewer than 10 --> returns true; more than 10 --> returns false
-// we want to use this to determine when we should stop prepending cards
-// function isLessThanTen() {
-//   var cardArray = $('.idea-card');
-//   if (cardArray.length < 10 === true) {
-//     return reloadCards()
-//   } else {
-//       return false
-//   }
-// }
-
-// function checkNumberOfTasks() {
-//   while ($('.idea-card').length < 10) {
-//     console.log('hey');
-//     reloadCards();
-//   }
-// }
 
 function clickSave() {
   var title = $('.input-title').val();
   var body = $('.input-task').val();
   var idea = new Idea(title, body);
-  prependCard(idea);
+  limitNumberOfCards(idea);
+  // prependCard(idea);
   sendToStorage(idea);
   clearInputFields();
   disableSaveButton();
@@ -218,7 +180,6 @@ function searchIdeas() {
   })
 }
 
-// put this in to save changes to title and task when enter button is pressed
 function saveEditsOnEnter(event) {
   var ideaID = ($(this).closest('.idea-card').prop('id'));
   var parsedIdea = JSON.parse(localStorage.getItem(ideaID));
@@ -245,6 +206,3 @@ function reloadCompletedTasks() {
     }
   }
 }
-
-// filtering by importance
-// we want to check each card for importance and

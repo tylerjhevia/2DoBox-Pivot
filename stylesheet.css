@@ -96,7 +96,7 @@ textarea::placeholder {
 
 .none-filter,
 .low-filter,
-.medium-filter,
+.normal-filter,
 .high-filter,
 .critical-filter {
   background-color: #00a79d;
