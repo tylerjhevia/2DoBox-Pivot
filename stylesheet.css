@@ -280,6 +280,7 @@ hr {
 .show-more-button {
   display: block;
   margin: 0 auto;
+  margin-bottom: 20px;
   width: 60%;
 }
 
@@ -357,5 +358,30 @@ main,
   .completed-task-button {
   margin: auto;
   width: 100%;
+  }
+}
+
+@media (min-width: 1300px) {
+  .save-button,
+  .show-completed-button,
+  .show-more-button {
+    font-size: 20px;
+  }
+
+  .none-filter,
+  .low-filter,
+  .normal-filter,
+  .high-filter,
+  .critical-filter,
+  .completed-task-button {
+    font-size: 15px;
+  }
+
+  .task-title {
+    font-size: 20px;
+  }
+
+  .task-body {
+    font-size: 15px;
   }
 }

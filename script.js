@@ -1,9 +1,4 @@
 // fix filter function to search through task titles as well as task bodies
-
-// make sure clicking the show more button doesn't reload completed tasks
-
-// make sure clicking the filter by class buttons don't append completed tasks
-
 $(document).ready(reloadCards);
 
 $('.input-title, .input-task').on('input', enableSaveButton);
@@ -23,7 +18,7 @@ $('.high-filter').on('click', filterCardsByImportance);
 $('.normal-filter').on('click', filterCardsByImportance);
 $('.low-filter').on('click', filterCardsByImportance);
 $('.none-filter').on('click', filterCardsByImportance);
-$('.show-more-button').on('click', reloadAllCards);
+$('.show-more-button').on('click', reloadAllIncomplete);
 
 function Task(title, body)  {
   this.title = title;
@@ -36,6 +31,7 @@ function Task(title, body)  {
 }
 
 function reloadCards() {
+  $('.task-card').remove();
   for (var i = 0; i < localStorage.length; i++) {
     var taskObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if (taskObject.completed === false) {
@@ -44,35 +40,46 @@ function reloadCards() {
   }
 }
 
-function reloadAllCards() {
-  $('.task-card').remove();
-  for (var i = 0; i < localStorage.length; i++) {
-    var taskObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    prependCard(taskObject);
-  }
-}
-
-// we want to check how many cards are on page when we press save
-// if there are < 10, we want to run prependCard as usual
-// if there are >= 10, we want to remove the oldest (bottom) card from the page and then run prependCard
 function limitNumberOfCards(task) {
   var cardCount = $('.task-card').length;
   var cardsOnScreenArray = $('.task-card');
   if (cardCount < 10) {
     prependCard(task);
   } else {
-     cardsOnScreenArray[9].remove();
-     prependCard(task);
-    }
+    cardsOnScreenArray[9].remove();
+    prependCard(task);
+  }
+}
+
+// function reloadAllCards() {
+//   $('.task-card').remove();
+//   for (var i = 0; i < localStorage.length; i++) {
+//     var taskObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+//     prependCard(taskObject);
+//   }
+// }
+
+function reloadAllIncomplete() {
+  $('.task-card').remove();
+  for (var i = 0; i < localStorage.length; i++) {
+    var taskObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    prependIfIncomplete(taskObject);
+  }
+}
+
+function prependIfIncomplete(taskObject) {
+  if (taskObject.completed === false) {
+    prependCard(taskObject);
+  }
 }
 
 function filterCardsByImportance() {
   $('.task-card').remove();
-  var filterBy = (this).innerHTML;
+  var qualityToFilterBy = (this).innerHTML;
   for (var i = 0; i < localStorage.length; i++) {
     var taskObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    if (taskObject.currentImportance === filterBy) {
-      prependCard(taskObject);
+    if (taskObject.currentImportance === qualityToFilterBy) {
+      prependIfIncomplete(taskObject);
     }
   }
 }
@@ -82,7 +89,6 @@ function clickSave() {
   var body = $('.input-task').val();
   var task = new Task(title, body);
   limitNumberOfCards(task);
-  // prependCard(task);
   sendToStorage(task);
   clearInputFields();
   disableSaveButton();
@@ -142,6 +148,16 @@ function editAndStoreBody() {
   localStorage.setItem(id, JSON.stringify(parsedTask));
 }
 
+function saveEditsOnEnter(event) {
+  var taskID = ($(this).closest('.task-card').prop('id'));
+  var parsedTask = JSON.parse(localStorage.getItem(taskID));
+  if(event.keyCode === 13) {
+    event.preventDefault();
+    sendToStorage(parsedTask);
+    $('.task-input').blur();
+  }
+}
+
 function downvote() {
   var id = $(this).parent().parent().prop('id');
   var parsedTask = JSON.parse(localStorage.getItem(id));
@@ -176,7 +192,6 @@ function searchTaskTitles() {
   var searchInput = $(this).val().toLowerCase();
   $('.task-card').each(function() {
     var taskText = $(this).find('.task-input').val().toLowerCase();
-    console.log($(this).find('.task-input'));
     if(taskText.indexOf(searchInput) !== -1) {
       $(this).show();
     }  else {
@@ -197,18 +212,6 @@ function searchTaskBodies() {
   })
 }
 
-// function displayMatches
-
-function saveEditsOnEnter(event) {
-  var taskID = ($(this).closest('.task-card').prop('id'));
-  var parsedTask = JSON.parse(localStorage.getItem(taskID));
-  if(event.keyCode === 13) {
-    event.preventDefault();
-    sendToStorage(parsedTask);
-    $('.task-input').blur();
-  }
-}
-
 function grayOutCompleted() {
   var taskID = ($(this).closest('.task-card').prop('id'));
   var parsedTask = JSON.parse(localStorage.getItem(taskID));
@@ -218,6 +221,7 @@ function grayOutCompleted() {
 }
 
 function reloadCompletedTasks() {
+  reloadCards();
   for (var i = 0; i < localStorage.length; i++) {
     var taskObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
     if (taskObject.completed === true) {
