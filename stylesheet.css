@@ -4,9 +4,17 @@
   font-family: 'Open Sans', sans-serif;
   margin: 0;
 }
+header {
+  background: #e5f3f2;
+  /*height: 40vh;*/
+}
 
 button:focus {
   border: none;
+  outline: none;
+}
+
+button:active {
   outline: none;
 }
 
@@ -14,10 +22,27 @@ textarea:focus {
   border: none;
 }
 
-header {
-  background: #e5f3f2;
-  height: 37vh;
+textarea::placeholder {
+  opacity: .8;
+  color: #939598;
+}
+
+input::placeholder {
+  color: #939598;
+  opacity: .8;
+}
+
+main {
+  height: auto;
   width: 100%;
+}
+
+hr {
+  height: 2px;
+  margin: 10px 0 10px 0;
+  color: #d1d3d4;
+  border: none;
+  background-color: #d1d3d4;
 }
 
 .input-container {
@@ -25,12 +50,11 @@ header {
   background: #e5f3f2;
   display: flex;
   flex-direction: column;
-  height: 226px;
+  /*height: 226px;*/
   margin: auto;
-  width: 320px;
 }
 
-.idea {
+.to-do {
   color: #00a79d;
   font-family: 'Roboto Slab', serif;
   font-size: 35px;
@@ -52,7 +76,6 @@ header {
   font-size: 14px;
   height: 25px;
   margin: 0 0 10px 0;
-  width: 300px;
 }
 
 .input-task {
@@ -61,19 +84,8 @@ header {
   color: #939598;
   font-size: 14px;
   height: 75px;
-  width: 300px;
   margin: 0 0 10px 0;
   resize: none;
-}
-
-input::placeholder {
-  color: #939598;
-  opacity: .8;
-}
-
-textarea::placeholder {
-  opacity: .8;
-  color: #939598;
 }
 
 .save-button,
@@ -82,30 +94,9 @@ textarea::placeholder {
   background: #00a79d;
   border: none;
   color: #fff;
-  height: 25px;
+  height: 30px;
   margin: 5px;
   text-decoration: none;
-  width: 300px;
-}
-
-.importance-filters {
-  display: flex;
-  justify-content: space-around;
-  width: 300px;
-}
-
-.none-filter,
-.low-filter,
-.normal-filter,
-.high-filter,
-.critical-filter {
-  background-color: #00a79d;
-  color: white;
-  height: 10%;
-}
-
-button:active {
-  outline: none;
 }
 
 .save-button:hover {
@@ -116,9 +107,12 @@ button:active {
   background: black;
 }
 
-main {
-  height: auto;
-  width: 100%;
+.show-completed-button {
+  margin-bottom: 10px;
+}
+
+.show-completed-button:hover {
+  background-color: #045e55;
 }
 
 .search-container {
@@ -127,7 +121,6 @@ main {
   flex-direction: column;
   height: 60px;
   margin: auto;
-  width: 320px;
 }
 
 .search-input {
@@ -136,7 +129,33 @@ main {
   font-size: 14px;
   height: 25px;
   margin: auto;
-  width: 300px;
+}
+
+.importance-filters {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+.none-filter,
+.low-filter,
+.normal-filter,
+.high-filter,
+.critical-filter {
+  border: none;
+  background-color: #00a79d;
+  color: #fff;
+  height: 10%;
+  width: 18%;
+}
+
+.none-filter:hover,
+.low-filter:hover,
+.normal-filter:hover,
+.high-filter:hover,
+.critical-filter:hover {
+  background-color: #045e55;
 }
 
 .card-container {
@@ -145,16 +164,14 @@ main {
   flex-direction: column;
   height: auto;
   margin: auto;
-  width: 320px;
 }
 
-.idea-card {
+.task-card {
   height: 200px;
   margin: auto;
-  width: 300px;
 }
 
-.idea-title {
+.task-title {
   border: none;
   color: #6d6e71;
   display: inline;
@@ -162,7 +179,7 @@ main {
   font-size: 14px;
   margin: 0 0 0 0;
   outline: none;
-  width: 275px;
+  width: 90%;
 }
 
 .delete-button {
@@ -179,7 +196,7 @@ main {
   background-image: url('assets/delete-hover.svg');
 }
 
-.idea-body {
+.task-body {
   border: none;
   color: #939598;
   font-size: 12px;
@@ -187,11 +204,14 @@ main {
   margin-bottom: 10px;
   margin-top: 10px;
   resize: none;
-  width: 300px;
+  width: 100%;
 }
 
 .button-container {
-  height: 22px;
+  align-items: center;
+  display: flex;
+  height: 15%;
+  justify-content: flex-start;
   width: 100%;
 }
 
@@ -229,133 +249,113 @@ main {
   color: #6d6e71;
   display: inline;
   font-family: 'Roboto Slab', serif;
-  font-size: 12px;
-  margin: 0 0 0 0;
-  position: relative;
-  top: -3px;
+  font-size: 20px;
+  margin: 5px;
 }
 
 .current-importance {
   color: #6d6e71;
-  display: inline;
-  font-size: 12px;
-  margin: 0 0 0 0;
-  position: relative;
-  top: -3px;
-}
-
-.show-more-button {
-  display: block;
-  margin: 0 auto;
+  font-size: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
 }
 
 .completed-task-button {
-  position: relative;
-  bottom: 4px;
+  background-color: #00a79d;
+  border: none;
+  color: #fff;
+  height: 30px;
+  margin-left: auto;
+  margin-right: 10px;
 }
 
 .completed-task-button:hover {
-  background-color: orange;
-}
-
-hr {
-  height: 2px;
-  margin: 10px 0 10px 0;
-  color: #d1d3d4;
-  border: none;
-  background-color: #d1d3d4;
+  background-color: #045e55;
 }
 
 .grayout {
   opacity: 0.3;
 }
 
-@media screen and (min-width: 750px) {
-  .input-container,
-  .search-container,
-  .card-container {
-    width: 700px;
+.show-more-button {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+}
+
+.show-more-button:hover {
+  background-color: #045e55;
+}
+
+header,
+main,
+.search-container,
+.card-container
+.input-container {
+  width: 100%;
+}
+
+.input-title,
+.input-task,
+.save-button,
+.show-completed-button,
+.search-input,
+.importance-filters,
+.task-card {
+  width: 60%;
+}
+
+@media (max-width: 650px) {
+
+  .button-container {
+    flex-wrap: wrap;
   }
 
-  .input-title,
-  .input-task,
-  .save-button,
-  .show-completed-button,
-  .search-input,
-  .idea-card {
-    width: 410px;
+
+  .importance,
+  .current-importance {
+    font-size: 12px;
   }
 
-  .idea-body {
-    width: 400px;
-  }
-
-  .idea-title {
-    width: 375px;
+  .current-importance {
+    margin-bottom: 3px;
   }
 }
 
-@media screen and (min-width: 1000px)
-{
-  .input-title,
-  .input-task,
-  .save-button,
-  .show-completed-button,
-  .search-input,
-  .idea-card {
-    width: 640px;
+@media (max-width: 500px) {
+  .button-container {
+    justify-content: center;
   }
 
-  .input-title,
-  .input-task,
-  .save-button,
-  .show-completed-button,
-  .search-input {
-    font-size: 26px;
-    height: 40px;
-  }
-
-  .idea,
-  .box {
-    font-size: 50px;
-  }
-
-  .input-container {
-    height: 243px;
-  }
-
-  .delete-button {
-    width: 30px;
-    height: 30px;
-    margin-top: 3px;
-  }
-
-  .idea-title {
-    font-size: 26px;
-  }
-
-  .idea-title,
-  .idea-body {
-    width: 590px;
-  }
-
-  .importance,
-  .current-importance,
-  .idea-body {
-    font-size: 20px;
-  }
-
-  .arrow-up,
-  .arrow-down {
-    width: 30px;
-    height: 30px;
-  }
-
-  .idea-card {
-    height: 210px;
+  .task-card {
+    height: 230px;
   }
 
   hr {
-    margin-top: 20px;
+    margin-top: 30px;
+  }
+
+
+  importance-filters {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .none-filter,
+  .low-filter,
+  .normal-filter,
+  .high-filter,
+  .critical-filter {
+    font-size: 8px;
+  }
+
+  .delete-button {
+    width: 18px;
+    height: 18px;
+  }
+
+  .completed-task-button {
+  margin: auto;
+  width: 100%;
   }
 }
