@@ -5,6 +5,10 @@
   margin: 0;
 }
 
+body {
+  width: 100%;
+}
+
 button:focus {
   border: none;
   outline: none;
@@ -16,7 +20,7 @@ textarea:focus {
 
 header {
   background: #e5f3f2;
-  height: 37vh;
+  height: 45vh;
   width: 100%;
 }
 
@@ -25,9 +29,10 @@ header {
   background: #e5f3f2;
   display: flex;
   flex-direction: column;
-  height: 226px;
+  height: 100%;
   margin: auto;
-  width: 320px;
+  width: 100%;
+  /*padding-bottom: 10px;*/
 }
 
 .idea {
@@ -35,7 +40,7 @@ header {
   font-family: 'Roboto Slab', serif;
   font-size: 35px;
   font-weight: 700;
-  margin: 12px 0 12px 0;
+  margin: 10px 0 5px 0;
 }
 
 .box {
@@ -49,19 +54,19 @@ header {
 .input-title {
   border: solid 2px #d1d3d4;
   color: #939598;
-  font-size: 14px;
-  height: 25px;
+  font-size: 26px;
+  height: 33.6px;
   margin: 0 0 10px 0;
-  width: 300px;
+  width: 650px;
 }
 
 .input-task {
   border-color: #d1d3d4;
   border-width: 2px;
   color: #939598;
-  font-size: 14px;
+  font-size: 26px;
   height: 75px;
-  width: 300px;
+  width: 650px;
   margin: 0 0 10px 0;
   resize: none;
 }
@@ -82,16 +87,18 @@ textarea::placeholder {
   background: #00a79d;
   border: none;
   color: #fff;
-  height: 25px;
+  height: 33.6px;
   margin: 5px;
   text-decoration: none;
-  width: 300px;
+  width: 650px;
+  font-size: 26px;
 }
 
 .importance-filters {
   display: flex;
-  justify-content: space-around;
-  width: 300px;
+  justify-content: space-between;
+  width: 650px;
+  margin: 5px 0 10px 0px;
 }
 
 .none-filter,
@@ -101,7 +108,11 @@ textarea::placeholder {
 .critical-filter {
   background-color: #00a79d;
   color: white;
-  height: 10%;
+  height: 33.6px;
+  width: 12%;
+  padding-top: 10px;
+  outline: none;
+  font-size: 15px;
 }
 
 button:active {
@@ -112,12 +123,16 @@ button:active {
   background: #045e55;
 }
 
+button:hover {
+  background: #045e55;
+}
+
 .save-button:disabled {
   background: black;
 }
 
 main {
-  height: auto;
+  height: 60%;
   width: 100%;
 }
 
@@ -127,16 +142,16 @@ main {
   flex-direction: column;
   height: 60px;
   margin: auto;
-  width: 320px;
+  width: 450px;
 }
 
 .search-input {
   border: solid 2px #d1d3d4;
   color: #939598;
-  font-size: 14px;
-  height: 25px;
+  font-size: 26px;
+  height: 33.6px;
   margin: auto;
-  width: 300px;
+  width: 450px;
 }
 
 .card-container {
@@ -182,12 +197,16 @@ main {
 .idea-body {
   border: none;
   color: #939598;
-  font-size: 12px;
+  font-size: 20px;
   height: 100px;
   margin-bottom: 10px;
   margin-top: 10px;
   resize: none;
   width: 300px;
+}
+
+.idea-input {
+  font-size: 26px;
 }
 
 .button-container {
@@ -227,9 +246,10 @@ main {
 
 .importance {
   color: #6d6e71;
+  font-weight: bold;
   display: inline;
   font-family: 'Roboto Slab', serif;
-  font-size: 12px;
+  font-size: 20px;
   margin: 0 0 0 0;
   position: relative;
   top: -3px;
@@ -238,7 +258,7 @@ main {
 .current-importance {
   color: #6d6e71;
   display: inline;
-  font-size: 12px;
+  font-size: 20px;
   margin: 0 0 0 0;
   position: relative;
   top: -3px;
@@ -251,7 +271,7 @@ main {
 
 .completed-task-button {
   position: relative;
-  bottom: 4px;
+  bottom: 15px;
 }
 
 .completed-task-button:hover {
@@ -282,8 +302,10 @@ hr {
   .save-button,
   .show-completed-button,
   .search-input,
-  .idea-card {
-    width: 410px;
+  .idea-card,
+  .importance-filters,
+  .show-more-button {
+    width: 650px;
   }
 
   .idea-body {
@@ -295,24 +317,37 @@ hr {
   }
 }
 
-@media screen and (min-width: 1000px)
+@media (max-width: 1000px)
 {
   .input-title,
   .input-task,
   .save-button,
   .show-completed-button,
   .search-input,
-  .idea-card {
-    width: 640px;
+  .idea-card,
+  .importance-filters,
+  .show-more-button {
+    width: 650px;
+    height: 33.6px;
+  }
+
+  .none-filter,
+  .low-filter,
+  .medium-filter,
+  .high-filter,
+  .critical-filter {
+    height: 100%;
   }
 
   .input-title,
   .input-task,
   .save-button,
   .show-completed-button,
-  .search-input {
+  .search-input,
+  .importance-filters,
+  .show-more-button,
+  .idea-title {
     font-size: 26px;
-    height: 40px;
   }
 
   .idea,
@@ -320,18 +355,18 @@ hr {
     font-size: 50px;
   }
 
+  header {
+    height: 39vh;
+  }
+
   .input-container {
-    height: 243px;
+    height: 100%;
   }
 
   .delete-button {
     width: 30px;
     height: 30px;
     margin-top: 3px;
-  }
-
-  .idea-title {
-    font-size: 26px;
   }
 
   .idea-title,
@@ -357,5 +392,29 @@ hr {
 
   hr {
     margin-top: 20px;
+  }
+}
+
+@media (max-width:500px) {
+  .input-title,
+  .input-task,
+  .save-button,
+  .show-completed-button,
+  .importance-filters,
+  .show-more-button,
+  .search-container {
+    width: 80%;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .none-filter,
+  .low-filter,
+  .medium-filter,
+  .high-filter,
+  .critical-filter {
+    width: 18%;
   }
 }
