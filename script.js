@@ -1,4 +1,3 @@
-// fix filter function to search through task titles as well as task bodies
 $(document).ready(reloadCards);
 
 $('.input-title, .input-task').on('input', enableSaveButton);
@@ -9,8 +8,7 @@ $('.card-container').on('keyup', '.task-body',  editAndStoreBody);
 $('.card-container').on('click', '.arrow-up', upvote);
 $('.card-container').on('click', '.arrow-down', downvote);
 $('.card-container').on('click', '.delete-button', deleteCard);
-$('.search-input').on('input',  searchTaskBodies)
-                  .on('input',  searchTaskTitles);
+$('.search-input').on('input',  searchTasks);
 $(".card-container").on("click", ".completed-task-button", grayOutCompleted);
 $('.card-container').on('keypress', '.task-input', saveEditsOnEnter);
 $('.critical-filter').on('click', filterCardsByImportance);
@@ -48,7 +46,7 @@ function limitNumberOfCards(task) {
   } else {
     cardsOnScreenArray[9].remove();
     prependCard(task);
-  }
+    }
 }
 
 // function reloadAllCards() {
@@ -151,7 +149,7 @@ function editAndStoreBody() {
 function saveEditsOnEnter(event) {
   var taskID = ($(this).closest('.task-card').prop('id'));
   var parsedTask = JSON.parse(localStorage.getItem(taskID));
-  if(event.keyCode === 13) {
+  if (event.keyCode === 13) {
     event.preventDefault();
     sendToStorage(parsedTask);
     $('.task-input').blur();
@@ -188,27 +186,15 @@ function deleteCard() {
   $(this).parent().remove();
 }
 
-function searchTaskTitles() {
+function searchTasks() {
   var searchInput = $(this).val().toLowerCase();
   $('.task-card').each(function() {
-    var taskText = $(this).find('.task-input').val().toLowerCase();
-    if(taskText.indexOf(searchInput) !== -1) {
-      $(this).show();
-    }  else {
-      $(this).hide();
-    }
-  })
-}
-
-function searchTaskBodies() {
-  var searchInput = $(this).val().toLowerCase();
-  $('.task-card').each(function() {
-    var taskText = $(this).find('.task-input').text().toLowerCase();
-    if(taskText.indexOf(searchInput) !== -1) {
+    var taskText = $(this).find('.task-title').val().toLowerCase() + $(this).find('.task-body').text().toLowerCase();
+    if (taskText.indexOf(searchInput) !== -1) {
       $(this).show();
     } else {
-      $(this).hide();
-    }
+        $(this).hide();
+      }
   })
 }
 
